@@ -9,9 +9,9 @@ def home_page(request):
 
     if Item.objects.count() == 0 :
         comment = 'yey, waktunya berlibur'
-    if (Item.objects.count() > 0) and (Item.objects.count() < 5) :
+    elif (Item.objects.count() > 0) and (Item.objects.count() < 5) :
         comment = 'sibuk tapi santai'
-    if Item.objects.count() >= 5 :
+    else :
         comment = 'oh tidak'
 
     items = Item.objects.all()
