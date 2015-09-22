@@ -39,8 +39,7 @@ class HomePageTest(TestCase):
         self.assertIn('yey, waktunya berlibur', response.content.decode())
 
     def test_home_page_displays_comment_if_todolist_is_less_than_5(self):
-        list_ = List.objects.create()
-        Item.objects.create(text='Itemey 1', list=list_)
+        Item.objects.create(text='Itemey 1')
         
         request = HttpRequest()
         response = home_page(request)
@@ -49,12 +48,11 @@ class HomePageTest(TestCase):
         self.assertIn('sibuk tapi santai', response.content.decode())
 
     def test_home_page_displays_comment_if_todolist_is_greater_equal_than_5(self):
-        list_ = List.objects.create()
-        Item.objects.create(text='Itemey 1', list=list_)
-        Item.objects.create(text='Itemey 2', list=list_)
-        Item.objects.create(text='Itemey 3', list=list_)
-        Item.objects.create(text='Itemey 4', list=list_)
-        Item.objects.create(text='Itemey 5', list=list_)
+        Item.objects.create(text='Itemey 1')
+        Item.objects.create(text='Itemey 2')
+        Item.objects.create(text='Itemey 3')
+        Item.objects.create(text='Itemey 4')
+        Item.objects.create(text='Itemey 5')
 
         request = HttpRequest()
         response = home_page(request)
