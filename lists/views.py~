@@ -3,7 +3,12 @@ from django.shortcuts import redirect, render
 from lists.models import Item, List
 
 def home_page(request):
-   
+    return render(request, 'home.html')
+
+def view_list(request, list_id):
+    list_ = List.objects.get(id=list_id)
+
+    comment = ''
     if Item.objects.count() == 0 :
         comment = 'yey, waktunya berlibur'
     elif (Item.objects.count() > 0) and (Item.objects.count() < 5) :
@@ -11,13 +16,7 @@ def home_page(request):
     else :
         comment = 'oh tidak'
 
-    items = Item.objects.all()
-    return render(request, 'home.html', {'comment':comment})
-
-def view_list(request, list_id):
-    list_ = List.objects.get(id=list_id)
-    items = Item.objects.filter(list=list_)
-    return render(request, 'list.html', {'items': items})
+    return render(request, 'list.html', {'list': list_, 'comment':comment})
 
 def new_list(request):
     list_ = List.objects.create()
