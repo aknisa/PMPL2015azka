@@ -3,24 +3,23 @@ from django.shortcuts import redirect, render
 from lists.models import Item, List
 
 def home_page(request):
-    
-    comment = ''
-    if Item.objects.count() == 0 :
-        comment = 'yey, waktunya berlibur'
-    elif (Item.objects.count() > 0) and (Item.objects.count() < 5) :
-        comment = 'sibuk tapi santai'
-    else :
-        comment = 'oh tidak'
+#    if request.method == 'POST':
+#        Item.objects.create(text=request.POST['tem_text'])
+#        return redirect('/lists/the-only-list-in-the-world/')
 
+    comment = 'yey, waktunya berlibur'
+    
+    items = Item.objects.all()
     return render(request, 'home.html', {'comment': comment})
 
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
 
     comment = ''
-    if Item.objects.count() == 0 :
+    countlist = Item.objects.filter(list_id=list_.id).count()
+    if countlist == 0 :
         comment = 'yey, waktunya berlibur'
-    elif (Item.objects.count() > 0) and (Item.objects.count() < 5) :
+    elif (countlist > 0) and (countlist < 5) :
         comment = 'sibuk tapi santai'
     else :
         comment = 'oh tidak'
