@@ -4,7 +4,6 @@
 
 {% block form_action %}/lists/new{% endblock %}
 
-{% block comment %}Comment: {{ comment }}{% endblock %}
 <!--<html>
     <head>
         <title>To-Do lists</title>
